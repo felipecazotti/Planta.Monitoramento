@@ -7,6 +7,7 @@ namespace Planta.Monitoramento.Api.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Umidade> DadosUmidade { get; set; }
+        public DbSet<ConfiguracaoDeAquisicao> ConfiguracoesDeAquisicao { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
