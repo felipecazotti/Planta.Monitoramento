@@ -17,20 +17,19 @@ namespace Planta.Monitoramento.Infra.Services
             _contexto = contexto;
         }
 
-        public async Task<GravarDadoUmidadeResponse> GravarDadoUmidade(GravarDadoUmidadeRequest request)
+        public async Task<GravarDadoUmidadeResponse> GravarDadoUmidadeAsync(GravarDadoUmidadeRequest request)
         {
             var dadoUmidadeModel = request.Adapt<Umidade>();
-            var taskRecuperaConfiguracaoAquisicao = _contexto.ConfiguracoesDeAquisicao.FirstAsync();
-            var dadoUmidadeAdicionado = _contexto.DadosUmidade.Add(dadoUmidadeModel);
-            var taskSalvaMudancasNoDb = _contexto.SaveChangesAsync();
-
-            await Task.WhenAll(taskRecuperaConfiguracaoAquisicao, taskSalvaMudancasNoDb);
+            var configuracaoAquisicao = await _contexto.ConfiguracoesDeAquisicao.FirstAsync();
+            await _contexto.DadosUmidade.AddAsync(dadoUmidadeModel);
+            await _contexto.SaveChangesAsync();
 
             return new GravarDadoUmidadeResponse
             {
-                DadoGravado = dadoUmidadeAdicionado.Entity.Adapt<UmidadeDto>(),
-                ConfiguracaoDeAquisicao = taskRecuperaConfiguracaoAquisicao.Result.Adapt<ConfiguracaoDeAquisicaoDto>()
+                DadoGravado = dadoUmidadeModel.Adapt<UmidadeDto>(),
+                ConfiguracaoDeAquisicao = configuracaoAquisicao.Adapt<ConfiguracaoDeAquisicaoDto>()
             };
+
         }
     }
 }

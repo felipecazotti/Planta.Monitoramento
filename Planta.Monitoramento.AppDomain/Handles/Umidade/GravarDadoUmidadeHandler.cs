@@ -15,7 +15,7 @@ namespace Planta.Monitoramento.AppDomain.Handles.Umidade
 
         public async Task<GravarDadoUmidadeResponse> Handle(GravarDadoUmidadeRequest request, CancellationToken cancellationToken)
         {
-            var response = await _umidadeService.GravarDadoUmidade(request);
+            var response = await _umidadeService.GravarDadoUmidadeAsync(request);
             return response;
         }
     }
