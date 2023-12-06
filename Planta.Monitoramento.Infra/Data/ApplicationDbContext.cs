@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Planta.Monitoramento.Api.Models;
+using Planta.Monitoramento.AppDomain.DbModels;
 
-namespace Planta.Monitoramento.Api.Data
+namespace Planta.Monitoramento.Infra.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

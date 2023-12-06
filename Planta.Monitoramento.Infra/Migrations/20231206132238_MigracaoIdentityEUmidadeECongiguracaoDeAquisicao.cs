@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Planta.Monitoramento.Api.Migrations
+namespace Planta.Monitoramento.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class MigracaoInicialIdentity : Migration
+    public partial class MigracaoIdentityEUmidadeECongiguracaoDeAquisicao : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -66,6 +66,39 @@ namespace Planta.Monitoramento.Api.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ConfiguracoesDeAquisicao",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    PeriodoAquisicaoEmSegundos = table.Column<double>(type: "double", nullable: false),
+                    ValorUmidadeMaxima = table.Column<int>(type: "int", nullable: false),
+                    ValorUmidadeMinima = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConfiguracoesDeAquisicao", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.Sql("INSERT INTO ConfiguracoesDeAquisicao (PeriodoAquisicaoEmSegundos, ValorUmidadeMaxima, ValorUmidadeMinima) VALUES (1.0, 0, 1023)");
+
+            migrationBuilder.CreateTable(
+                name: "DadosUmidade",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    TimeStamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UmidadeRelativa = table.Column<double>(type: "double", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DadosUmidade", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -251,6 +284,12 @@ namespace Planta.Monitoramento.Api.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "ConfiguracoesDeAquisicao");
+
+            migrationBuilder.DropTable(
+                name: "DadosUmidade");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

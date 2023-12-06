@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Planta.Monitoramento.Api.Models
+namespace Planta.Monitoramento.AppDomain.DbModels
 {
     public class ConfiguracaoDeAquisicao
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Planta.Monitoramento.Api.Models
+namespace Planta.Monitoramento.AppDomain.DbModels
 {
     public class Umidade
     {
@@ -8,7 +8,7 @@ namespace Planta.Monitoramento.Api.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "TimeStamp é obrigatório ")]
-        public DateTime TimesStamp { get; set; }
+        public DateTime TimeStamp { get; set; }
 
         [Required(ErrorMessage = "UmidadeRelativa é obrigatória")]
         [Range(0.0, 100.0, ErrorMessage = "Valor de UmidadeRelativa fora do limite de 0% a 100%")]

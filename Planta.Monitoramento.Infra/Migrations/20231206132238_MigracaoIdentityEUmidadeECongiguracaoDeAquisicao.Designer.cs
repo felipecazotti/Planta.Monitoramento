@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Planta.Monitoramento.Api.Data;
+using Planta.Monitoramento.Infra.Data;
 
 #nullable disable
 
-namespace Planta.Monitoramento.Api.Migrations
+namespace Planta.Monitoramento.Infra.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231202214520_MigracaoInicialIdentity")]
-    partial class MigracaoInicialIdentity
+    [Migration("20231206132238_MigracaoIdentityEUmidadeECongiguracaoDeAquisicao")]
+    partial class MigracaoIdentityEUmidadeECongiguracaoDeAquisicao
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -216,6 +216,43 @@ namespace Planta.Monitoramento.Api.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("Planta.Monitoramento.AppDomain.DbModels.ConfiguracaoDeAquisicao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<double>("PeriodoAquisicaoEmSegundos")
+                        .HasColumnType("double");
+
+                    b.Property<int>("ValorUmidadeMaxima")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ValorUmidadeMinima")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConfiguracoesDeAquisicao");
+                });
+
+            modelBuilder.Entity("Planta.Monitoramento.AppDomain.DbModels.Umidade", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<double>("UmidadeRelativa")
+                        .HasColumnType("double");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DadosUmidade");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

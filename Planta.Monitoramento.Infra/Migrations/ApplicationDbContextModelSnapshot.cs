@@ -3,11 +3,11 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Planta.Monitoramento.Api.Data;
+using Planta.Monitoramento.Infra.Data;
 
 #nullable disable
 
-namespace Planta.Monitoramento.Api.Migrations
+namespace Planta.Monitoramento.Infra.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -215,7 +215,7 @@ namespace Planta.Monitoramento.Api.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Planta.Monitoramento.Api.Models.ConfiguracaoDeAquisicao", b =>
+            modelBuilder.Entity("Planta.Monitoramento.AppDomain.DbModels.ConfiguracaoDeAquisicao", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -235,13 +235,13 @@ namespace Planta.Monitoramento.Api.Migrations
                     b.ToTable("ConfiguracoesDeAquisicao");
                 });
 
-            modelBuilder.Entity("Planta.Monitoramento.Api.Models.Umidade", b =>
+            modelBuilder.Entity("Planta.Monitoramento.AppDomain.DbModels.Umidade", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("TimesStamp")
+                    b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime(6)");
 
                     b.Property<double>("UmidadeRelativa")
